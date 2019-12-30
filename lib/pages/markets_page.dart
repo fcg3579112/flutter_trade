@@ -10,7 +10,8 @@ class MarketsPage extends StatefulWidget {
   _MarketsPageState createState() => _MarketsPageState();
 }
 
-class _MarketsPageState extends State<MarketsPage> {
+class _MarketsPageState extends State<MarketsPage>
+    with SingleTickerProviderStateMixin {
   final List<Widget> children = [
     WatchListPage(),
     MarketSZPage(),
@@ -18,26 +19,43 @@ class _MarketsPageState extends State<MarketsPage> {
     MarketBJPage(),
   ];
   static List<String> titles = ['自选', '上证', '深圳', '创业'];
-  final List<Widget> texts = titles.map((f) => Text(f)).toList();
+  TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: children.length);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: children.length,
-      child: Scaffold(
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              TabBar(
-                isScrollable: true,
-                tabs: texts,
-              ),
-              TabBarView(
-                children: children,
-              ),
-            ],
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 50,
+            child: TabBar(
+              isScrollable: true,
+              controller: _tabController,
+              tabs: titles
+                  .map((f) => Tab(
+                        text: f,
+                      ))
+                  .toList(),
+            ),
           ),
-        ),
+          Flexible(
+            child: TabBarView(
+              controller: _tabController,
+              children: children,
+            ),
+          ),
+        ],
       ),
     );
   }
