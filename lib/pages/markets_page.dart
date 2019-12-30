@@ -18,7 +18,7 @@ class _MarketsPageState extends State<MarketsPage>
     MarketSHPage(),
     MarketBJPage(),
   ];
-  static List<String> titles = ['自选', '上证', '深圳', '创业'];
+  static List<String> titles = ['自选列表', '上证指数', '深圳指数', '创业指数'];
   TabController _tabController;
   @override
   void initState() {
@@ -38,10 +38,21 @@ class _MarketsPageState extends State<MarketsPage>
       body: Column(
         children: <Widget>[
           Container(
-            height: 50,
+            height: 40,
             child: TabBar(
               isScrollable: true,
               controller: _tabController,
+              labelColor: Colors.red,
+              labelPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              unselectedLabelColor: Colors.black45,
+              indicatorColor: Colors.red,
+              indicator: UnderlineTabIndicator(
+                  insets: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  borderSide: BorderSide(
+                    color: Colors.green,
+                    width: 3,
+                    style: BorderStyle.solid,
+                  )),
               tabs: titles
                   .map((f) => Tab(
                         text: f,

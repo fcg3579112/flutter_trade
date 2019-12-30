@@ -8,7 +8,7 @@ class _MarketBJPageState extends State<MarketBJPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.pink,
+      
     );
   }
 }

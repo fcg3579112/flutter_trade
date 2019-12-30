@@ -8,7 +8,7 @@ class _WatchListPageState extends State<WatchListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      child: PageView(),
     );
   }
 }
